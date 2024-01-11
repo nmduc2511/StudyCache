@@ -1,0 +1,6 @@
+framework module Pods_StudyCache {
+  umbrella header "Pods-StudyCache-umbrella.h"
+
+  export *
+  module * { export * }
+}

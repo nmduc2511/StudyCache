@@ -1,0 +1,25 @@
+PODS:
+  - PINCache (3.0.3):
+    - PINCache/Arc-exception-safe (= 3.0.3)
+    - PINCache/Core (= 3.0.3)
+  - PINCache/Arc-exception-safe (3.0.3):
+    - PINCache/Core
+  - PINCache/Core (3.0.3):
+    - PINOperation (~> 1.2.1)
+  - PINOperation (1.2.2)
+
+DEPENDENCIES:
+  - PINCache
+
+SPEC REPOS:
+  trunk:
+    - PINCache
+    - PINOperation
+
+SPEC CHECKSUMS:
+  PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
+  PINOperation: daa34d4aa1d8449089be7d405b9d974abc4724c6
+
+PODFILE CHECKSUM: 5baf0519bd85212462ff7444ee02d3b127a21346
+
+COCOAPODS: 1.14.3
