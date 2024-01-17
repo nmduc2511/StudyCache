@@ -1,19 +1,8 @@
-//
-//  AssetMemoryCache.swift
-//  StudyCache
-//
-//  Created by Nguyen Minh Duc on 26/12/2023.
-//
-
 import Foundation
 
-class AssetMemoryCache: NSObject {
-    // MARK: - shared variable
-    static let shared = AssetMemoryCache()
-
+class ASMemoryCache: NSObject {
     // MARK: - private variable
     private var objects: [String: Any]
-    private var createdDates: [String: Date]
     private var accessDates: [String: Date]
     private var costs: [String: Int]
     private var total: Int = 0
@@ -21,11 +10,11 @@ class AssetMemoryCache: NSObject {
     private var nslock: NSLock
 
     // MARK: - public variable
-    var costLimit: Int = 100 * 1024 * 1024
+    var costLimit: Int = 0 * 1024 * 1024
+    var ageLimit: Int = 0 * 60 * 60
 
     override init() {
         objects = [:]
-        createdDates = [:]
         accessDates = [:]
         costs = [:]
         queues = OperationQueue()
@@ -68,19 +57,17 @@ class AssetMemoryCache: NSObject {
 
     // MARK: - private function
     private func setObject(_ obj: Any, key: String, cost: Int) {
-        lock() // lock
+        lock()
 
         let now = Date()
         objects[key] = obj
-        createdDates[key] = now
         accessDates[key] = now
         costs[key] = cost
 
         if costLimit > 0 {
             total += cost
         }
-
-        unlock() // unlock
+        unlock()
 
         if costLimit > 0 {
             deleteObjectsByDate()
@@ -88,19 +75,18 @@ class AssetMemoryCache: NSObject {
     }
 
     private func deleteObject(byKey key: String) {
-        lock() // lock
+        lock()
 
         let cost = costs[key] ?? 0
         objects.removeValue(forKey: key)
-        createdDates.removeValue(forKey: key)
         accessDates.removeValue(forKey: key)
         costs.removeValue(forKey: key)
 
         if costLimit > 0 {
             total -= cost
         }
-
-        unlock() // unlock
+        
+        unlock()
     }
 
     private func deleteObjectsByDate() {

@@ -1,16 +1,9 @@
-//
-//  PINCacheManager.swift
-//  StudyCache
-//
-//  Created by Nguyen Minh Duc on 21/12/2023.
-//
-
 import Foundation
 import PINCache
 
 class PINCacheManager: NSObject {
     static let shared = PINCacheManager()
-    private var cache = PINCache(name: "OMG")
+    private var cache = PINCache(name: "Memory_Cache")
 
     override init() {
         super.init()

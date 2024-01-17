@@ -7,7 +7,13 @@
 
 import UIKit
 
-var usingPinCache = true
+enum CachingType {
+case pinCache
+case custom
+}
+
+var cachingType: CachingType = .custom
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?

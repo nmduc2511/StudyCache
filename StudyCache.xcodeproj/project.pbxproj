@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1EF9F67D555FCE3ACD37C0DA /* Pods_StudyCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBBDFD683748A9B12C285CD4 /* Pods_StudyCache.framework */; };
+		6C4FC1D62B56BC81009E40EF /* ASRemoteCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4FC1D52B56BC81009E40EF /* ASRemoteCache.swift */; };
+		6C4FC1D82B56BFB9009E40EF /* UIImage+ASImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4FC1D72B56BFB9009E40EF /* UIImage+ASImage.swift */; };
+		6C4FC1DA2B56D1F0009E40EF /* ASCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4FC1D92B56D1F0009E40EF /* ASCache.swift */; };
 		BA0237B82B342AA00047420D /* PINCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0237B72B342A9F0047420D /* PINCacheManager.swift */; };
 		BA0AD28D2B3AE17F007CBEE7 /* UImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0AD28C2B3AE17F007CBEE7 /* UImage+Cache.swift */; };
 		BA3043512B2C00BF00CBDE24 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3043502B2C00BF00CBDE24 /* API.swift */; };
@@ -18,7 +21,7 @@
 		BA679B3C2B2834CE00FCEC38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA679B3A2B2834CE00FCEC38 /* Main.storyboard */; };
 		BA679B3E2B2834D000FCEC38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA679B3D2B2834D000FCEC38 /* Assets.xcassets */; };
 		BA679B412B2834D000FCEC38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA679B3F2B2834D000FCEC38 /* LaunchScreen.storyboard */; };
-		BA6C1FFA2B3A791300550E86 /* AssetMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6C1FF92B3A791300550E86 /* AssetMemoryCache.swift */; };
+		BA6C1FFA2B3A791300550E86 /* ASMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6C1FF92B3A791300550E86 /* ASMemoryCache.swift */; };
 		BA7838912B32ED1000991039 /* ThreadSafeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7838902B32ED1000991039 /* ThreadSafeCounter.swift */; };
 		BAF93D6E2B29894200E6F828 /* CacheTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF93D6C2B29894200E6F828 /* CacheTableCell.swift */; };
 		BAF93D6F2B29894200E6F828 /* CacheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAF93D6D2B29894200E6F828 /* CacheTableCell.xib */; };
@@ -26,6 +29,9 @@
 
 /* Begin PBXFileReference section */
 		49B03CC779B0BF3144054E3B /* Pods-StudyCache.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyCache.debug.xcconfig"; path = "Target Support Files/Pods-StudyCache/Pods-StudyCache.debug.xcconfig"; sourceTree = "<group>"; };
+		6C4FC1D52B56BC81009E40EF /* ASRemoteCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASRemoteCache.swift; sourceTree = "<group>"; };
+		6C4FC1D72B56BFB9009E40EF /* UIImage+ASImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ASImage.swift"; sourceTree = "<group>"; };
+		6C4FC1D92B56D1F0009E40EF /* ASCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCache.swift; sourceTree = "<group>"; };
 		BA0237B72B342A9F0047420D /* PINCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINCacheManager.swift; sourceTree = "<group>"; };
 		BA0AD28C2B3AE17F007CBEE7 /* UImage+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UImage+Cache.swift"; sourceTree = "<group>"; };
 		BA3043502B2C00BF00CBDE24 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -38,7 +44,7 @@
 		BA679B3D2B2834D000FCEC38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA679B402B2834D000FCEC38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA679B422B2834D000FCEC38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA6C1FF92B3A791300550E86 /* AssetMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetMemoryCache.swift; sourceTree = "<group>"; };
+		BA6C1FF92B3A791300550E86 /* ASMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASMemoryCache.swift; sourceTree = "<group>"; };
 		BA7838902B32ED1000991039 /* ThreadSafeCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeCounter.swift; sourceTree = "<group>"; };
 		BAF93D6C2B29894200E6F828 /* CacheTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTableCell.swift; sourceTree = "<group>"; };
 		BAF93D6D2B29894200E6F828 /* CacheTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CacheTableCell.xib; sourceTree = "<group>"; };
@@ -88,7 +94,9 @@
 			children = (
 				BA3043532B2C0B9F00CBDE24 /* NSCacheManager.swift */,
 				BA0237B72B342A9F0047420D /* PINCacheManager.swift */,
-				BA6C1FF92B3A791300550E86 /* AssetMemoryCache.swift */,
+				BA6C1FF92B3A791300550E86 /* ASMemoryCache.swift */,
+				6C4FC1D52B56BC81009E40EF /* ASRemoteCache.swift */,
+				6C4FC1D92B56D1F0009E40EF /* ASCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				BA0AD28C2B3AE17F007CBEE7 /* UImage+Cache.swift */,
+				6C4FC1D72B56BFB9009E40EF /* UIImage+ASImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,8 +286,11 @@
 				BA3043572B2C0E3500CBDE24 /* ImageModel.swift in Sources */,
 				BA3043542B2C0B9F00CBDE24 /* NSCacheManager.swift in Sources */,
 				BA679B392B2834CE00FCEC38 /* ViewController.swift in Sources */,
+				6C4FC1DA2B56D1F0009E40EF /* ASCache.swift in Sources */,
 				BA3043512B2C00BF00CBDE24 /* API.swift in Sources */,
-				BA6C1FFA2B3A791300550E86 /* AssetMemoryCache.swift in Sources */,
+				6C4FC1D82B56BFB9009E40EF /* UIImage+ASImage.swift in Sources */,
+				6C4FC1D62B56BC81009E40EF /* ASRemoteCache.swift in Sources */,
+				BA6C1FFA2B3A791300550E86 /* ASMemoryCache.swift in Sources */,
 				BA0237B82B342AA00047420D /* PINCacheManager.swift in Sources */,
 				BA679B352B2834CE00FCEC38 /* AppDelegate.swift in Sources */,
 			);
@@ -358,7 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -415,7 +427,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -433,7 +445,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2BNAZD94KK;
+				DEVELOPMENT_TEAM = X2JYAUGN87;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyCache/Info.plist;
@@ -441,7 +453,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -473,7 +485,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

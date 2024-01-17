@@ -10,8 +10,9 @@ import Foundation
 
 class ViewController: UIViewController {
     @IBOutlet private weak var imgView: UIImageView!
+    @IBOutlet private weak var tableView: UITableView!
+    
     var images = [ImageModel]()
-    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,14 +54,19 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return images.count
-        return images.isEmpty ? 0 : 30
+        return images.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CacheTableCell", for: indexPath) as? CacheTableCell
         let image = images[indexPath.row]
-        cell?.bindingData(image)
+        
+        switch cachingType {
+        case .custom:
+            cell?.custom(image)
+        case .pinCache:
+            cell?.pinCache(image)
+        }
         return cell ?? CacheTableCell()
     }
 

@@ -14,39 +14,27 @@ class CacheTableCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        loadingView.isHidden = true
     }
 
     override func prepareForReuse() {
-        if let url = image?.url {
-            API.shared.cancel(URL(string: url))
-            imgView.image = nil
-        }
+        imgView.image = nil
     }
 
-    func bindingData(_ model: ImageModel) {
+    func custom(_ model: ImageModel) {
+        image = model
+        imgView.setASImage(model.url, cacheType: .ramAndDisk)
+    }
+    
+    func pinCache(_ model: ImageModel) {
         image = model
 
-//        if usingPinCache,
-//           let data = PINCacheManager.shared
-//            .object(forKey: model.url) as? Data {
-//            loadingView.isHidden = true
-//            loadingView.stopAnimating()
-//            imgView.image = UIImage(data: data)
-//        } else if !usingPinCache,
-//                  let data = NSCacheManager.shared
-//            .object(model.url) as? NSData {
-//
-//            loadingView.isHidden = true
-//            loadingView.stopAnimating()
-//            let image = UIImage(data: data as Data)
-//            imgView.image = image
-        if let image = AssetMemoryCache.shared
-            .object(key: model.url) as? UIImage {
+        if let data = PINCacheManager.shared
+            .object(forKey: model.url) as? Data {
             loadingView.isHidden = true
             loadingView.stopAnimating()
-            imgView.image = image
+            imgView.image = UIImage(data: data)
         } else if let url = URL(string: model.url) {
-//        if let url = URL(string: model.url) {
             loadingView.isHidden = false
             loadingView.startAnimating()
 
@@ -58,8 +46,8 @@ class CacheTableCell: UITableViewCell {
                         let image = UIImage(data: data)
                     else { return }
 
-                    AssetMemoryCache.shared
-                        .saveObject(image, key: model.url, cost: data.count)
+                    PINCacheManager.shared
+                        .setData(data, forKey: url.absoluteString)
 
                     DispatchQueue.main.async {
                         self.loadingView.isHidden = true
@@ -67,8 +55,7 @@ class CacheTableCell: UITableViewCell {
                         self.imgView.image = image
                     }
                 },
-                onError: { error in
-                })
+                onError: { error in })
         }
     }
 }

@@ -541,6 +541,9 @@ static NSString * const PINMemoryCacheSharedName = @"PINMemoryCacheSharedName";
         _totalCost += cost;
     [self unlock];
     
+    long _cost = _totalCost / 1024 / 1024;
+    NSLog(@"~~~ total: %lu", (unsigned long)_cost);
+    
     if (didAddObjectBlock)
         didAddObjectBlock(self, key, object);
     
