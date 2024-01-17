@@ -38,9 +38,7 @@ class ThreadSafeCounter {
         }
         
         // Truy cập nguồn chia sẻ
-        print("~~~ thread1: \(Thread.current)")
         counter += 1
-        print("Counter tăng lên \(counter)")
     }
 
     func getValue() -> Int {

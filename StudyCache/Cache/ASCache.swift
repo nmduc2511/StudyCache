@@ -3,12 +3,15 @@ import Foundation
 class ASCache: NSObject {
     static let shared = ASCache()
     
+    private let disk: ASDiskCache
     private let memory: ASMemoryCache
     private let remote: ASRemoteCache
-    
+
     override init() {
         memory = ASMemoryCache()
         memory.costLimit = 50 * 1024 * 1024
+        disk = ASDiskCache()
+        disk.costLimit = 10 * 1024 * 1024
         remote = ASRemoteCache()
         super.init()
     }
@@ -16,11 +19,22 @@ class ASCache: NSObject {
     func getImage(_ url: URL,
                   cacheType type: ASCacheType,
                   completion: ((Data) -> Void)?) {
-        if let data = memory
-            .object(key: url.absoluteString) as? Data {
-            completion?(data)
-            return
+
+        switch type {
+        case .ramAndDisk:
+            if let data = memory
+                .object(key: url.absoluteString) as? Data {
+                completion?(data)
+                return
+            }
+        case .onlyDisk:
+            if let data = disk
+                .object(key: url.absoluteString) as? Data {
+                completion?(data)
+                return
+            }
         }
+
         
         remote.getImage(
             url: url,
@@ -41,7 +55,7 @@ class ASCache: NSObject {
         case .ramAndDisk:
             memory.saveObject(data, key: key, cost: data.count)
         case .onlyDisk:
-            break
+            disk.saveObject(data, key: key, cost: data.count)
         }
     }
 }

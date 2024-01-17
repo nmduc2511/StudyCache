@@ -38,5 +38,19 @@ extension UIImageView {
             }
     }
     
-    private func setASImageInOnlyDisk(_ url: URL) {}
+    private func setASImageInOnlyDisk(_ url: URL) {
+        func setImage(from data: Data) {
+            DispatchQueue.global(qos: .background).asyncAndWait {
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self.image = image
+                }
+            }
+        }
+
+        ASCache.shared
+            .getImage(url, cacheType: .onlyDisk) { data in
+                setImage(from: data)
+            }
+    }
 }

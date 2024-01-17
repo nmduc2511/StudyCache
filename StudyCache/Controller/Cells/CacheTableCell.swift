@@ -23,7 +23,7 @@ class CacheTableCell: UITableViewCell {
 
     func custom(_ model: ImageModel) {
         image = model
-        imgView.setASImage(model.url, cacheType: .ramAndDisk)
+        imgView.setASImage(model.url, cacheType: .onlyDisk)
     }
     
     func pinCache(_ model: ImageModel) {
