@@ -2,8 +2,12 @@ import Foundation
 
 struct ASDiskAttribute: Codable {
     var size: Int
-    var data: Data
     var createDates: Date
+    var modifiDates: Date
+
+    var string: String {
+        return "create: \(createDates) - modifi: \(modifiDates) - size: \(size)"
+    }
 }
 
 class ASDiskCache: NSObject {
@@ -39,10 +43,10 @@ class ASDiskCache: NSObject {
         costs = [:]
         attributes = [:]
         queues = OperationQueue()
+        queues.maxConcurrentOperationCount = 10
         nslock = NSLock()
         super.init()
-        createDirectory()
-        clearDiskIfNeed()
+        setupDirectory()
     }
 
     // MARK: - NSLock
@@ -61,9 +65,8 @@ class ASDiskCache: NSObject {
             try self.fileManager.setAttributes(
                 [.modificationDate : Date()],
                 ofItemAtPath: path.path)
-
         } catch {
-            print("Attribute: \(error.localizedDescription)")
+            print("ASDiskError ===> getObject: \(error.localizedDescription)")
         }
 
         return data
@@ -77,13 +80,24 @@ class ASDiskCache: NSObject {
     }
 
     // MARK: - private function
-    private func createDirectory() {
-        try? fileManager.createDirectory(at: cacheURL, withIntermediateDirectories: true)
+    private func setupDirectory() {
+        if fileManager.fileExists(atPath: cacheURL.path) {
+            syncAttributesFromDisk()
+        } else {
+            do {
+                try fileManager.createDirectory(
+                    at: cacheURL,
+                    withIntermediateDirectories: true
+                )
+            } catch {
+                print("ASDiskCache ===> Error: \(error.localizedDescription)")
+            }
+        }
+//        print("~~~ dirPath: \(cacheURL.absoluteString)")
     }
 
-    private func clearDiskIfNeed() {
-        var totalSize: Int = 0
-        var datas = [String: Data]()
+    private func syncAttributesFromDisk() {
+        lock()
         fileManager
             .enumerator(atPath: cacheURL.path)?
             .filter({ ($0 as? String) != nil })
@@ -91,94 +105,85 @@ class ASDiskCache: NSObject {
             .forEach({ filePath in
                 guard
                     let fileAttributes = try? fileManager.attributesOfItem(
-                        atPath: cacheURL.appendingPathComponent(filePath).path),
-                    let data = try? Data(
-                        contentsOf: cacheURL.appendingPathComponent(filePath))
+                        atPath: cacheURL.appendingPathComponent(filePath).path)
                 else { return }
 
-                if let fileSize = fileAttributes[.size] as? Int {
-                    totalSize += fileSize
-                }
+                if let size = fileAttributes[.size] as? Int,
+                   let cDate = fileAttributes[.creationDate] as? Date,
+                   let mDate = fileAttributes[.modificationDate] as? Date {
 
-                if let date = fileAttributes[.modificationDate] as? Date {
-                    print("~~~ date: \(date)")
+                    let attribute = ASDiskAttribute(
+                        size: size,
+                        createDates: cDate,
+                        modifiDates: mDate)
+                    attributes[filePath] = attribute
+                    total += size
                 }
-
-                datas[filePath] = data
             })
-
-//        guard totalSize > costLimit else { return }
-//        for (key, value) in datas {
-//            do {
-//                try fileManager.removeItem(
-//                    at: cacheURL.appendingPathComponent(key))
-//
-//                totalSize -= value.count
-//                if totalSize < costLimit {
-//                    total = totalSize
-////                    print("~~~ storageTotal2: \(totalSize)")
-//                    break
-//                }
-////                print("~~~ storageTotal1: \(totalSize)")
-//            } catch {
-////                print("~~~ clearDiskIfNeed: \(error.localizedDescription)")
-//            }
-//        }
+        unlock()
     }
 
-    private func setObject(_ obj: Any, key: String, cost: Int) {
+    private func setObject(_ obj: Any,
+                           key: String,
+                           cost: Int) {
         lock()
 
         let now = Date()
-        objects[key] = obj
-        accessDates[key] = now
+        attributes[key] = ASDiskAttribute(
+            size: cost,
+            createDates: now,
+            modifiDates: now
+        )
         costs[key] = cost
 
         if costLimit > 0 {
             total += cost
         }
 
-//        print("~~~ diskTotal: \(total)")
         unlock()
 
         writeToDisk(obj, key: key)
 
-        if costLimit > 0 {
+        if costLimit > 0,
+           total > costLimit {
             deleteObjectsByDate()
         }
     }
 
-    private func deleteObject(byKey key: String) {
-        lock()
-
-        let cost = costs[key] ?? 0
-        objects.removeValue(forKey: key)
-        accessDates.removeValue(forKey: key)
-        costs.removeValue(forKey: key)
-
-        removeFromDisk(key: key)
-
-        if costLimit > 0 {
-            total -= cost
-        }
-
-        unlock()
-    }
-
     private func deleteObjectsByDate() {
-        guard total > costLimit else { return }
+        let block = BlockOperation { [weak self] in
+            guard let self = self else { return }
+            self.lock()
 
-        lock()
-        let dates = accessDates.sorted(by: { $0.value < $1.value })
-        unlock()
+            let dates = Array(attributes)
+                .sorted(by: { $0.value.modifiDates < $1.value.modifiDates })
 
-        for dict in dates {
-            self.deleteObject(byKey: dict.key)
+            for dict in dates {
+                do {
+                    let path = self.cacheURL.appendingPathComponent(dict.key.asTrim())
+                    guard self.fileManager.fileExists(atPath: path.path) else {
+                        print("~~~ delete: \(false) - path: \(dict.key)")
+                        return
+                    }
 
-            if total < costLimit {
-                break
+                    try self.fileManager.removeItem(at: path)
+                    let cost = attributes[dict.key]?.size ?? 0
+                    self.costs.removeValue(forKey: dict.key)
+                    self.attributes.removeValue(forKey: dict.key)
+                    self.total -= cost
+                    if self.total < self.costLimit {
+                        break
+                    }
+                    print("~~~ delete: \(true) - path: \(dict.key)")
+                } catch {
+                    let path = self.cacheURL.appendingPathComponent(dict.key.asTrim())
+                    print("ASDiskError ===> removeFile: \(error.localizedDescription) - url: \(path)")
+                }
             }
+
+            self.unlock()
         }
+        queues.addOperation(block)
     }
 
     private func writeToDisk(_ obj: Any, key: String) {
@@ -187,33 +192,18 @@ class ASDiskCache: NSObject {
         let block = BlockOperation {
             do {
                 self.lock()
-                let path = self.cacheURL.appendingPathComponent(key.asTrim())
 
+                let path = self.cacheURL.appendingPathComponent(key.asTrim())
                 try data.write(to: path, options: .withoutOverwriting)
+                if self.fileManager.fileExists(atPath: path.path) {
+                    print("~~~ fileExists: \(true) - path: \(key.asTrim())")
+                } else {
+                    print("~~~ fileExists: \(false) - path: \(key.asTrim())")
+                }
                 self.unlock()
             } catch {
                 self.unlock()
                 print("ASDiskError ===> Write: \(error.localizedDescription) - url: \(key)")
-            }
-        }
-
-        queues.addOperation(block)
-    }
-
-    private func removeFromDisk(key: String) {
-        let block = BlockOperation {
-            do {
-                self.lock()
-                let edit = key
-                    .replacingOccurrences(of: "https://", with: "")
-                    .replacingOccurrences(of: "http://", with: "")
-                    .replacingOccurrences(of: "/", with: "-")
-                let path = self.cacheURL.appendingPathComponent(edit)
-
-                try self.fileManager.removeItem(at: path)
-                self.unlock()
-            } catch {
-//                print("ASDiskError ===> Remove: \(error.localizedDescription) - url: \(key)")
             }
         }
 
