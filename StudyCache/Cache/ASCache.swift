@@ -6,14 +6,20 @@ class ASCache: NSObject {
     private let disk: ASDiskCache
     private let memory: ASMemoryCache
     private let remote: ASRemoteCache
+    private var didSetDataBlock: ((Data, String, ASCacheType) -> Void)?
 
     override init() {
         memory = ASMemoryCache()
         memory.costLimit = 50 * 1024 * 1024
         disk = ASDiskCache()
-        disk.costLimit = 10 * 1024 * 1024
+        disk.costLimit = 50 * 1024 * 1024
         remote = ASRemoteCache()
         super.init()
+        
+        didSetDataBlock = { [weak self] data, key, type in
+            guard let self = self else { return }
+            self.setData(data, key: key, cacheType: type)
+        }
     }
     
     func getImage(_ url: URL,
@@ -27,6 +33,13 @@ class ASCache: NSObject {
                 completion?(data)
                 return
             }
+            
+            if let data = disk
+                .object(key: url.absoluteString) as? Data {
+                completion?(data)
+                didSetDataBlock?(data, url.absoluteString, type)
+                return
+            }
         case .onlyDisk:
             if let data = disk
                 .object(key: url.absoluteString) as? Data {
@@ -35,7 +48,6 @@ class ASCache: NSObject {
             }
         }
 
-        
         remote.getImage(
             url: url,
             onNext: { [weak self] data in
@@ -54,6 +66,7 @@ class ASCache: NSObject {
         switch cacheType {
         case .ramAndDisk:
             memory.saveObject(data, key: key, cost: data.count)
+            disk.saveObject(data, key: key, cost: data.count)
         case .onlyDisk:
             disk.saveObject(data, key: key, cost: data.count)
         }
