@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AssetsCaching
 
 enum CachingType {
 case pinCache
@@ -19,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        ASCache.shared.diskCostLimit = 100
+        ASCache.shared.memoryCostLimit = 50
         return true
     }
 }

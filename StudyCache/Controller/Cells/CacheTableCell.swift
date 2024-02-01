@@ -1,4 +1,5 @@
 import UIKit
+import AssetsCaching
 
 class CacheTableCell: UITableViewCell {
     @IBOutlet weak var imgView: UIImageView!
@@ -16,6 +17,6 @@ class CacheTableCell: UITableViewCell {
 
     func bindingData(_ model: ImageModel) {
         image = model
-        imgView.setASImage(model.url, cacheType: .onlyDisk)
+        imgView.setASImage(model.url)
     }
 }

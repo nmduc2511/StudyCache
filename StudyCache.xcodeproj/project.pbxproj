@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1EF9F67D555FCE3ACD37C0DA /* Pods_StudyCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBBDFD683748A9B12C285CD4 /* Pods_StudyCache.framework */; };
-		6C4FC1D62B56BC81009E40EF /* ASRemoteCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4FC1D52B56BC81009E40EF /* ASRemoteCache.swift */; };
-		6C4FC1D82B56BFB9009E40EF /* UIImage+ASImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4FC1D72B56BFB9009E40EF /* UIImage+ASImage.swift */; };
-		6C4FC1DA2B56D1F0009E40EF /* ASCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4FC1D92B56D1F0009E40EF /* ASCache.swift */; };
-		BA0184992B577105002F1C36 /* ASDiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0184982B577105002F1C36 /* ASDiskCache.swift */; };
+		6CABB10F2B6BF34F00E76851 /* AssetsCaching.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CABB10D2B6BF34A00E76851 /* AssetsCaching.framework */; };
+		6CABB1102B6BF34F00E76851 /* AssetsCaching.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CABB10D2B6BF34A00E76851 /* AssetsCaching.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA01849B2B57D400002F1C36 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01849A2B57D400002F1C36 /* String+Extension.swift */; };
 		BA0237B82B342AA00047420D /* PINCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0237B72B342A9F0047420D /* PINCacheManager.swift */; };
 		BA0AD28D2B3AE17F007CBEE7 /* UImage+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0AD28C2B3AE17F007CBEE7 /* UImage+Cache.swift */; };
@@ -23,18 +21,28 @@
 		BA679B3C2B2834CE00FCEC38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA679B3A2B2834CE00FCEC38 /* Main.storyboard */; };
 		BA679B3E2B2834D000FCEC38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA679B3D2B2834D000FCEC38 /* Assets.xcassets */; };
 		BA679B412B2834D000FCEC38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA679B3F2B2834D000FCEC38 /* LaunchScreen.storyboard */; };
-		BA6C1FFA2B3A791300550E86 /* ASMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6C1FF92B3A791300550E86 /* ASMemoryCache.swift */; };
 		BA7838912B32ED1000991039 /* ThreadSafeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7838902B32ED1000991039 /* ThreadSafeCounter.swift */; };
 		BAF93D6E2B29894200E6F828 /* CacheTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF93D6C2B29894200E6F828 /* CacheTableCell.swift */; };
 		BAF93D6F2B29894200E6F828 /* CacheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAF93D6D2B29894200E6F828 /* CacheTableCell.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6CABB1062B6BED6B00E76851 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6CABB1102B6BF34F00E76851 /* AssetsCaching.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		49B03CC779B0BF3144054E3B /* Pods-StudyCache.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyCache.debug.xcconfig"; path = "Target Support Files/Pods-StudyCache/Pods-StudyCache.debug.xcconfig"; sourceTree = "<group>"; };
-		6C4FC1D52B56BC81009E40EF /* ASRemoteCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASRemoteCache.swift; sourceTree = "<group>"; };
-		6C4FC1D72B56BFB9009E40EF /* UIImage+ASImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ASImage.swift"; sourceTree = "<group>"; };
-		6C4FC1D92B56D1F0009E40EF /* ASCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCache.swift; sourceTree = "<group>"; };
-		BA0184982B577105002F1C36 /* ASDiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASDiskCache.swift; sourceTree = "<group>"; };
+		6CABB10D2B6BF34A00E76851 /* AssetsCaching.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AssetsCaching.framework; sourceTree = "<group>"; };
 		BA01849A2B57D400002F1C36 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		BA0237B72B342A9F0047420D /* PINCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINCacheManager.swift; sourceTree = "<group>"; };
 		BA0AD28C2B3AE17F007CBEE7 /* UImage+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UImage+Cache.swift"; sourceTree = "<group>"; };
@@ -48,7 +56,6 @@
 		BA679B3D2B2834D000FCEC38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA679B402B2834D000FCEC38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA679B422B2834D000FCEC38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA6C1FF92B3A791300550E86 /* ASMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASMemoryCache.swift; sourceTree = "<group>"; };
 		BA7838902B32ED1000991039 /* ThreadSafeCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeCounter.swift; sourceTree = "<group>"; };
 		BAF93D6C2B29894200E6F828 /* CacheTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTableCell.swift; sourceTree = "<group>"; };
 		BAF93D6D2B29894200E6F828 /* CacheTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CacheTableCell.xib; sourceTree = "<group>"; };
@@ -62,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EF9F67D555FCE3ACD37C0DA /* Pods_StudyCache.framework in Frameworks */,
+				6CABB10F2B6BF34F00E76851 /* AssetsCaching.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +88,7 @@
 		A258614E9774817DF8C1B339 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CABB10D2B6BF34A00E76851 /* AssetsCaching.framework */,
 				EBBDFD683748A9B12C285CD4 /* Pods_StudyCache.framework */,
 			);
 			name = Frameworks;
@@ -98,10 +107,6 @@
 			children = (
 				BA3043532B2C0B9F00CBDE24 /* NSCacheManager.swift */,
 				BA0237B72B342A9F0047420D /* PINCacheManager.swift */,
-				BA0184982B577105002F1C36 /* ASDiskCache.swift */,
-				BA6C1FF92B3A791300550E86 /* ASMemoryCache.swift */,
-				6C4FC1D52B56BC81009E40EF /* ASRemoteCache.swift */,
-				6C4FC1D92B56D1F0009E40EF /* ASCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -164,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				BA0AD28C2B3AE17F007CBEE7 /* UImage+Cache.swift */,
-				6C4FC1D72B56BFB9009E40EF /* UIImage+ASImage.swift */,
 				BA01849A2B57D400002F1C36 /* String+Extension.swift */,
 			);
 			path = Extensions;
@@ -182,6 +186,7 @@
 				BA679B2E2B2834CE00FCEC38 /* Frameworks */,
 				BA679B2F2B2834CE00FCEC38 /* Resources */,
 				19093D12E3E4284D8BADD95E /* [CP] Embed Pods Frameworks */,
+				6CABB1062B6BED6B00E76851 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -291,13 +296,8 @@
 				BA0AD28D2B3AE17F007CBEE7 /* UImage+Cache.swift in Sources */,
 				BA3043572B2C0E3500CBDE24 /* ImageModel.swift in Sources */,
 				BA3043542B2C0B9F00CBDE24 /* NSCacheManager.swift in Sources */,
-				BA0184992B577105002F1C36 /* ASDiskCache.swift in Sources */,
 				BA679B392B2834CE00FCEC38 /* ViewController.swift in Sources */,
-				6C4FC1DA2B56D1F0009E40EF /* ASCache.swift in Sources */,
 				BA3043512B2C00BF00CBDE24 /* API.swift in Sources */,
-				6C4FC1D82B56BFB9009E40EF /* UIImage+ASImage.swift in Sources */,
-				6C4FC1D62B56BC81009E40EF /* ASRemoteCache.swift in Sources */,
-				BA6C1FFA2B3A791300550E86 /* ASMemoryCache.swift in Sources */,
 				BA0237B82B342AA00047420D /* PINCacheManager.swift in Sources */,
 				BA01849B2B57D400002F1C36 /* String+Extension.swift in Sources */,
 				BA679B352B2834CE00FCEC38 /* AppDelegate.swift in Sources */,
@@ -455,6 +455,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X2JYAUGN87;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyCache/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -487,6 +491,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2BNAZD94KK;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StudyCache/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
