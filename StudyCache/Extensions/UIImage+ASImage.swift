@@ -24,7 +24,7 @@ extension UIImageView {
     
     private func setASImageInRamAndDisk(_ url: URL) {
         func setImage(from data: Data) {
-            DispatchQueue.global(qos: .background).asyncAndWait {
+            DispatchQueue.global(qos: .background).async {
                 let image = UIImage(data: data)
                 DispatchQueue.main.async {
                     self.image = image
@@ -40,7 +40,7 @@ extension UIImageView {
     
     private func setASImageInOnlyDisk(_ url: URL) {
         func setImage(from data: Data) {
-            DispatchQueue.global(qos: .background).asyncAndWait {
+            DispatchQueue.global(qos: .background).async {
                 let image = UIImage(data: data)
                 DispatchQueue.main.async {
                     self.image = image
