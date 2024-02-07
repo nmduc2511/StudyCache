@@ -60,8 +60,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CacheTableCell", for: indexPath) as? CacheTableCell
         let image = images[indexPath.row]
-        cell?.bindingData(image)
-    
+
+        switch cachingType {
+        case .pinCache:
+            cell?.bindingData(image)
+        case .sdWebImage:
+            cell?.sdWebImage(image)
+        case .kingfisher:
+            cell?.kingfisher(image)
+        }
+
         return cell ?? CacheTableCell()
     }
 

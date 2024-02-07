@@ -4,4 +4,6 @@
 target 'StudyCache' do
   use_frameworks!
 pod 'PINCache'
+pod 'SDWebImage'
+pod 'Kingfisher'
 end
